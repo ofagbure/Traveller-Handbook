@@ -7,22 +7,47 @@ var placesAutocomplete = places({
 
 // Geo DB city details api request
 function getCityDetails(cityID) {
-	// code coming soon
+	console.log('getCityDetails');
+	// creating query URL with input cityID
+	var queryURL = 'https://wft-geo-db.p.rapidapi.com/v1/geo/cities/' + cityID;
+
+	// preparing settings with new url
+	var settings = {
+		async: true,
+		crossDomain: true,
+		url: queryURL,
+		method: 'GET',
+		headers: {
+			'x-rapidapi-host': 'wft-geo-db.p.rapidapi.com',
+			'x-rapidapi-key': '8671db22c0mshaa910c9a37cdeb0p1568fejsn57c4371fdcb4'
+		}
+	};
+
+	// calling city details api request
+	$.ajax(settings).then(function(response) {
+		console.log(response);
+	});
 }
 
 // initial ajax request from GeoDB cities API
 function getCities(settings) {
+	console.log('getCities');
 	$.ajax(settings).then(function(response) {
 		console.log(response);
 
 		// grabbing city ID for the upcoming api requests
 		var cityID = response.data[0].id;
 		console.log(cityID);
+
+		setTimeout(function() {
+			getCityDetails(cityID);
+		}, 1000);
 	});
 }
 
 // the event listener for the input box
 placesAutocomplete.on('change', (e) => {
+	console.log('placesAutocomplete');
 	// saving the input object in a variable
 	var inputObject = e.suggestion;
 
