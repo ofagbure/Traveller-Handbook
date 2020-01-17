@@ -5,10 +5,19 @@ var placesAutocomplete = places({
 	container: document.querySelector('#address-input')
 });
 
+// Geo DB city details api request
+function getCityDetails(cityID) {
+	// code coming soon
+}
+
 // initial ajax request from GeoDB cities API
 function getCities(settings) {
 	$.ajax(settings).then(function(response) {
 		console.log(response);
+
+		// grabbing city ID for the upcoming api requests
+		var cityID = response.data[0].id;
+		console.log(cityID);
 	});
 }
 
