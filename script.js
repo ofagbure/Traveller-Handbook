@@ -1,25 +1,36 @@
-var something = 'does this work';
-
+// Algolia third-party api
 var placesAutocomplete = places({
 	appId: 'plHJ3V77N7R0',
 	apiKey: '15c839632d2df1c8823fe9d3cd8988f5',
 	container: document.querySelector('#address-input')
 });
 
-// console.log(placesAutocomplete);
+// initial ajax request from GeoDB cities API
+function getCities(settings) {
+	$.ajax(settings).then(function(response) {
+		console.log(response);
+	});
+}
+
+// the event listener for the input box
 placesAutocomplete.on('change', (e) => {
-	console.log(e.suggestion);
+	// saving the input object in a variable
 	var inputObject = e.suggestion;
 
+	// grabbing city name and country code from the input
 	var cityName = inputObject.name;
 	var countryCode = inputObject.countryCode;
+	// console.log(cityName, countryCode);
 
-	console.log(cityName, countryCode);
+	// creating the query URL for the ajax request
+	var queryURL =
+		'https://wft-geo-db.p.rapidapi.com/v1/geo/cities?countryIds=' + countryCode + '&namePrefix=' + cityName;
 
+	// creating settings object for the ajax call, including the url above
 	var settings = {
 		async: true,
 		crossDomain: true,
-		url: 'https://wft-geo-db.p.rapidapi.com/v1/geo/cities?countryIds=us&namePrefix=miami',
+		url: queryURL,
 		method: 'GET',
 		headers: {
 			'x-rapidapi-host': 'wft-geo-db.p.rapidapi.com',
@@ -27,12 +38,6 @@ placesAutocomplete.on('change', (e) => {
 		}
 	};
 
-	$.ajax(settings).then(function(response) {
-		console.log(response);
-	});
+	// function to call the ajax request
+	getCities(settings);
 });
-
-// placesAutocomplete.on('submit', function() {
-// 	var cityInput = placesAutocomplete.getVal();
-// 	console.log(cityInput);
-// });
