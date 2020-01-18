@@ -41,24 +41,36 @@ function getCities(settings) {
 
 		setTimeout(function() {
 			getCityDetails(cityID);
-		}, 1000);
+		}, 1500);
 	});
 }
 
 // the event listener for the input box
 placesAutocomplete.on('change', (e) => {
-	console.log('placesAutocomplete');
 	// saving the input object in a variable
 	var inputObject = e.suggestion;
+	console.log(inputObject);
 
-	// grabbing city name and country code from the input
+	// grabbing city name and country code from the input, and latitude and longitude
 	var cityName = inputObject.name;
 	var countryCode = inputObject.countryCode;
+	var location = inputObject.latlng.lat.toString() + inputObject.latlng.lng.toString();
+
+	// console.log(typeof location, location);
+
 	// console.log(cityName, countryCode);
 
 	// creating the query URL for the ajax request
 	var queryURL =
-		'https://wft-geo-db.p.rapidapi.com/v1/geo/cities?countryIds=' + countryCode + '&namePrefix=' + cityName;
+		'https://wft-geo-db.p.rapidapi.com/v1/geo/cities?countryIds=' +
+		countryCode +
+		'&namePrefix=' +
+		cityName +
+		'&location=' +
+		location +
+		'&radius=10';
+
+	// console.log(queryURL);
 
 	// creating settings object for the ajax call, including the url above
 	var settings = {
