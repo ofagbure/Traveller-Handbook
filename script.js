@@ -23,9 +23,48 @@ function getCityDetails(cityID) {
 		}
 	};
 
+	function getCurrentTime(timezone) {
+		// settings
+		var settings = {
+			async: true,
+			crossDomain: true,
+			url: 'https://wft-geo-db.p.rapidapi.com/v1/locale/timezones/' + timezone + '/time',
+			method: 'GET',
+			headers: {
+				'x-rapidapi-host': 'wft-geo-db.p.rapidapi.com',
+				'x-rapidapi-key': '8671db22c0mshaa910c9a37cdeb0p1568fejsn57c4371fdcb4'
+			}
+		};
+
+		return $.ajax(settings).then(function(response) {
+			// console.log(response, response.data);
+			var currentTime = response.data.substring(0, 5);
+
+			return currentTime;
+		});
+	}
+
 	// calling city details api request
 	$.ajax(settings).then(function(response) {
 		console.log(response);
+
+		// grabbing population
+		var population = response.data.population;
+
+		// in meters
+		var elevation = response.data.elevationMeters;
+
+		// timezone code for another api call
+		var timezone = response.data.timezone;
+
+		// Wait 1.5 seconds because our API takes one call per second max for free plan
+		setTimeout(function() {
+			getCurrentTime(timezone).then(function(currentTime) {
+				console.log(currentTime);
+
+				// add to dom here
+			});
+		}, 1500);
 	});
 }
 
@@ -37,7 +76,7 @@ function getCities(settings) {
 
 		// grabbing city ID for the upcoming api requests
 		var cityID = response.data[0].id;
-		console.log(cityID);
+		// console.log(cityID);
 
 		// Wait 1.5 seconds because our API takes one call per second max for free plan
 		setTimeout(function() {
