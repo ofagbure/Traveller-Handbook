@@ -24,6 +24,9 @@ function getCityDetails(cityID) {
 	};
 
 	function getCurrentTime(timezone) {
+		if (!timezone) {
+			return 'Not Available';
+		}
 		// settings
 		var settings = {
 			async: true,
@@ -38,6 +41,7 @@ function getCityDetails(cityID) {
 
 		return $.ajax(settings).then(function(response) {
 			// console.log(response, response.data);
+			console.log(response.data);
 			var currentTime = response.data.substring(0, 5);
 
 			return currentTime;
@@ -49,10 +53,10 @@ function getCityDetails(cityID) {
 		console.log(response);
 
 		// grabbing population
-		var population = response.data.population;
+		var population = response.data.population || 'Not Available';
 
 		// in meters
-		var elevation = response.data.elevationMeters;
+		var elevation = response.data.elevationMeters || 'Not Available';
 
 		// timezone code for another api call
 		var timezone = response.data.timezone;
@@ -100,7 +104,12 @@ placesAutocomplete.on('change', (e) => {
 	// grabbing city name and country code from the input, and latitude and longitude
 	var cityName = inputObject.name;
 	var countryCode = inputObject.countryCode;
-	var location = inputObject.latlng.lat.toString() + inputObject.latlng.lng.toString();
+	var lng =
+		inputObject.latlng.lng.toString().charAt(0) === '-'
+			? inputObject.latlng.lng.toFixed(4)
+			: '%2B' + inputObject.latlng.lng.toFixed(4);
+	var location = inputObject.latlng.lat.toFixed(4) + lng;
+	console.log(location);
 
 	// console.log(typeof location, location);
 
