@@ -62,7 +62,10 @@ function getCityDetails(cityID) {
 			getCurrentTime(timezone).then(function(currentTime) {
 				console.log(currentTime);
 
-				// add to dom here
+				var popEl = $('<p>').text('Population: ' + population);
+				var elevationEl = $('<p>').text('Elevation (m): ' + elevation);
+				var timeEl = $('<p>').text('Current Time: ' + currentTime);
+				$('#moreInfo').append(popEl, elevationEl, timeEl);
 			});
 		}, 1500);
 	});
@@ -90,6 +93,9 @@ placesAutocomplete.on('change', (e) => {
 	// saving the input object in a variable
 	var inputObject = e.suggestion;
 	console.log(inputObject);
+
+	$('.results-card').show();
+	$('.intro-card').hide();
 
 	// grabbing city name and country code from the input, and latitude and longitude
 	var cityName = inputObject.name;
