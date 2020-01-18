@@ -39,6 +39,7 @@ function getCities(settings) {
 		var cityID = response.data[0].id;
 		console.log(cityID);
 
+		// Wait 1.5 seconds because our API takes one call per second max for free plan
 		setTimeout(function() {
 			getCityDetails(cityID);
 		}, 1500);
