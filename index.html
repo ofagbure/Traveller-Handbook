@@ -5,25 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Links to external files -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script defer src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/places.js@1.17.1"></script>
     <script defer src="./script.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <title>The Traveller's Handbook</title>
 </head>
-
+<!-- Nav Bar -->
 <div>
     <nav>
         <div class="nav-wrapper">
             <a href="#" class="brand-logo center">The Traveller's Handbook</a>
         </div>
     </nav>
+</div>
+<!-- Intro Card -->
+<div class="background">
+<div class="card card1">
+    <div class="card-content">
+        <div class="card-title center">Hello Travellers!! Welcome to our page!</div>
+        <p class="center">
+            <br>
+            How hard is it to decide where to go? How do you decide where your next destination will be?
+            <br>
+            Well, we at "The Traveller's Handbook" have a handy way to help make your travel dreams come true!
+            <br>
+            Enter your city of choice bellow and we will give you some helpful information on that city that can
+            make your decision easier!
+        </p>
+        <br>
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/mZH7nKv28J8?start=18" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
 
-        <ul class="collection with-header col s12">
+<div class="container">
+    <div class="row">
+        <ul class="collection with-header N/A transparent col s12 card1">
             <li class="collection-header">
                 <h5>Type in your city here</h5>
                 <div class="row">
@@ -38,7 +65,8 @@
                 </div>
             </li>
         </ul>
-        <div class="col s12">
+        <!-- Results card that will be hidden at the beginning of the page -->
+        <div class="col s12 results-card">
             <div class="card-panel">
                 <div class="row">
                     <div class="row">
@@ -46,7 +74,7 @@
                             <div class="card-panel teal">
                                 <div class="card-content white-text">
                                     <span class="card-title">Weather Conditions</span>
-                                    <p></p>
+                                    <p id="weather"></p>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +82,7 @@
                             <div class="card-panel teal">
                                 <div class="card-content white-text">
                                     <span class="card-title">Currency Details</span>
-                                    <p></p>
+                                    <p id="currency"></p>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +92,7 @@
                             <div class="card-panel teal">
                                 <div class="card-content white-text">
                                     <span class="card-title">More Information</span>
-                                    <p></p>
+                                    <p id="moreInfo"></p>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +100,7 @@
                             <div class="card-panel teal">
                                 <div class="card-content white-text">
                                     <span class="card-title">Fun cities nearby!</span>
-                                    <p></p>
+                                    <p id="citiesAround"></p>
                                 </div>
                             </div>
                         </div>
@@ -80,9 +108,10 @@
                 </div>
             </div>
         </div>
-    
-</div>
 
+    </div>
+</div>
+</div>
 <footer class="page-footer">
     <div class="footer-copyright">
         <div class="container center">
@@ -91,5 +120,6 @@
     </div>
 </footer>
 </body>
+
 
 </html>

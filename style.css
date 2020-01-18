@@ -7,3 +7,17 @@ body {
   main {
     flex: 1 0 auto;
   }
+
+  .card1 {
+      border: 0px;
+  }
+  .collection.with-header .collection-header{
+    border-bottom: 0px;
+  } 
+  .card .card-content{
+    border: 0px;
+}
+
+.results-card{
+display: none;
+}
