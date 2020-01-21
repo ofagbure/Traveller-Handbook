@@ -65,6 +65,7 @@ function getCityDetails(cityID) {
 		setTimeout(function() {
 			getCurrentTime(timezone).then(function(currentTime) {
 				console.log(currentTime);
+				$('#moreInfo').empty();
 
 				var popEl = $('<p>').text('Population: ' + population);
 				var elevationEl = $('<p>').text('Elevation (m): ' + elevation);
@@ -89,6 +90,32 @@ function getCities(settings) {
 		setTimeout(function() {
 			getCityDetails(cityID);
 		}, 1500);
+	});
+}
+
+function getCurrentWeather(cityName) {
+	var queryURL =
+		'https://api.openweathermap.org/data/2.5/weather?q=' +
+		cityName +
+		'&APPID=7ed6e592c87c5c5e7c239aee3ee410d9&units=imperial';
+
+	$.ajax({
+		url: queryURL,
+		method: 'GET'
+	}).then(function(response) {
+		console.log(response);
+		var temp = response.main.temp;
+		var humidity = response.main.humidity;
+		var windSpeed = response.wind.speed;
+
+		var lat = response.coord.lat;
+		var long = response.coord.lon;
+
+		// uvIndex(lat, long);
+
+		// $('#temp').text(temp + ' ' + String.fromCharCode(176) + 'F');
+		// $('#humidity').text(humidity + '%');
+		// $('#wind-speed').text(windSpeed + ' mph');
 	});
 }
 
