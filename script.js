@@ -30,6 +30,8 @@ function getCurrentTime(timezone) {
 	});
 }
 
+function getNearbyCities(cityID) {}
+
 // Geo DB city details api request
 function getCityDetails(cityID) {
 	console.log('getCityDetails');
@@ -61,16 +63,25 @@ function getCityDetails(cityID) {
 		// timezone code for another api call
 		var timezone = response.data.timezone;
 
+		// City ID for the nearby cities function call
+		var cityID = response.data.id;
+		// console.log('city id: ' + cityID);
+
+		// Empty the more info section before appending new data
+		$('#moreInfo').empty();
+
+		var popEl = $('<p>').text('Population: ' + population);
+		var elevationEl = $('<p>').text('Elevation (m): ' + elevation);
+
 		// Wait 1.5 seconds because our API takes one call per second max for free plan
 		setTimeout(function() {
 			getCurrentTime(timezone).then(function(currentTime) {
 				console.log(currentTime);
-				$('#moreInfo').empty();
 
-				var popEl = $('<p>').text('Population: ' + population);
-				var elevationEl = $('<p>').text('Elevation (m): ' + elevation);
 				var timeEl = $('<p>').text('Current Time: ' + currentTime);
 				$('#moreInfo').append(popEl, elevationEl, timeEl);
+
+				setTimeout(getNearbyCities(cityID), 1500);
 			});
 		}, 1500);
 	});
@@ -137,6 +148,38 @@ function getCurrentWeather(cityName) {
 	});
 }
 
+function getCityInfo(cityName) {
+	var queryURL =
+		'https://tripadvisor1.p.rapidapi.com/locations/search?limit=1&sort=relevance&offset=0&lang=en_US&currency=USD&units=mi&query=' +
+		cityName;
+
+	var settings = {
+		async: true,
+		crossDomain: true,
+		url: queryURL,
+		method: 'GET',
+		headers: {
+			'x-rapidapi-host': 'tripadvisor1.p.rapidapi.com',
+			'x-rapidapi-key': '8671db22c0mshaa910c9a37cdeb0p1568fejsn57c4371fdcb4'
+		}
+	};
+
+	$.ajax(settings).then(function(response) {
+		console.log('new response', response);
+
+		var cityDescription = response.data[0]['result_object']['geo_description'];
+		var imgURL = response.data[0]['result_object'].photo.images.large.url;
+
+		console.log(cityDescription, imgURL);
+
+		var cityDescEl = $('<p>').text(cityDescription);
+		var cityImg = $('<img src=' + imgURL + ' alt=city image>');
+
+		$('.city-name').text(cityName);
+		$('#cityInfo').append(cityImg, cityDescEl);
+	});
+}
+
 // the event listener for the input box
 placesAutocomplete.on('change', (e) => {
 	// saving the input object in a variable
@@ -157,6 +200,7 @@ placesAutocomplete.on('change', (e) => {
 	var location = inputObject.latlng.lat.toFixed(4) + lng;
 
 	getCurrentWeather(cityName);
+	getCityInfo(cityName);
 
 	// creating the query URL for the ajax request
 	var queryURL =
