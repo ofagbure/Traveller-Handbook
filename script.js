@@ -30,7 +30,45 @@ function getCurrentTime(timezone) {
 	});
 }
 
-function getNearbyCities(cityID) {}
+function getCurrencyDetails(countryID) {
+	console.log('currency call');
+
+	var queryURL = 'https://wft-geo-db.p.rapidapi.com/v1/locale/currencies?countryId=' + countryID;
+
+	var settings = {
+		async: true,
+		crossDomain: true,
+		url: queryURL,
+		method: 'GET',
+		headers: {
+			'x-rapidapi-host': 'wft-geo-db.p.rapidapi.com',
+			'x-rapidapi-key': '8671db22c0mshaa910c9a37cdeb0p1568fejsn57c4371fdcb4'
+		}
+	};
+
+	$.ajax(settings).then(function(response) {
+		console.log('currency', response);
+
+		var currencyCode = response.data[0].code;
+
+		var url = 'https://currency13.p.rapidapi.com/convert/100/USD/' + currencyCode;
+
+		var settings = {
+			async: true,
+			crossDomain: true,
+			url: url,
+			method: 'GET',
+			headers: {
+				'x-rapidapi-host': 'currency13.p.rapidapi.com',
+				'x-rapidapi-key': '8671db22c0mshaa910c9a37cdeb0p1568fejsn57c4371fdcb4'
+			}
+		};
+
+		$.ajax(settings).then(function(response) {
+			console.log(response);
+		});
+	});
+}
 
 // Geo DB city details api request
 function getCityDetails(cityID) {
@@ -52,7 +90,7 @@ function getCityDetails(cityID) {
 
 	// calling city details api request
 	$.ajax(settings).then(function(response) {
-		console.log(response);
+		console.log('city details', response);
 
 		// grabbing population
 		var population = response.data.population || 'Not Available';
@@ -65,7 +103,9 @@ function getCityDetails(cityID) {
 
 		// City ID for the nearby cities function call
 		var cityID = response.data.id;
-		// console.log('city id: ' + cityID);
+
+		// getting country code for currency details call
+		var countryID = response.data.countryCode;
 
 		// Empty the more info section before appending new data
 		$('#moreInfo').empty();
@@ -81,7 +121,9 @@ function getCityDetails(cityID) {
 				var timeEl = $('<p>').text('Current Time: ' + currentTime);
 				$('#moreInfo').append(popEl, elevationEl, timeEl);
 
-				setTimeout(getNearbyCities(cityID), 1500);
+				setTimeout(function() {
+					getCurrencyDetails(countryID);
+				}, 1500);
 			});
 		}, 1500);
 	});
@@ -175,6 +217,8 @@ function getCityInfo(cityName) {
 		var cityDescEl = $('<p>').text(cityDescription);
 		var cityImg = $('<img src=' + imgURL + ' alt=city image>');
 
+		$('.city-name').empty();
+		$('#cityInfo').empty();
 		$('.city-name').text(cityName);
 		$('#cityInfo').append(cityImg, cityDescEl);
 	});
