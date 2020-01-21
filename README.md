@@ -9,7 +9,8 @@ Materialize - CSS Framework
 Jquery - JS Library
 
 # API used...
-Geo BD
-Weather
-Currency
+-Geo BD
+-Open Weather API
+-Currency
+-Trip Advisor API
 
