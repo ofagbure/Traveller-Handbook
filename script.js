@@ -105,12 +105,30 @@ function getCurrentWeather(cityName) {
 	}).then(function(response) {
 		console.log(response);
 		var temp = response.main.temp;
-		var humidity = response.main.humidity;
+		var description = response.weather[0].description;
+		var feelsLike = response.main['feels_like'];
+		var status = response.weather[0].main;
+		var hi = response.main['temp_max'];
+		var low = response.main['temp_min'];
+
+		console.log(hi, low, typeof hi, typeof low);
+
 		var windSpeed = response.wind.speed;
 
-		var lat = response.coord.lat;
-		var long = response.coord.lon;
+		$('#weather').empty();
 
+		var tempEl = $('<p>').text('Temperature: ' + temp + ' ' + String.fromCharCode(176) + 'F');
+		var feelsLikeEl = $('<p>').text('Feels like: ' + feelsLike + ' ' + String.fromCharCode(176) + 'F');
+		var statusEl = $('<p>').text('Status: ' + status);
+		var descripEl = $('<p>').text('Description: ' + description);
+		var windSpeedEl = $('<p>').text('Wind speed: ' + windSpeed + ' mph');
+		var lowEl = $('<p>').text('Low: ' + low + ' ' + String.fromCharCode(176) + 'F');
+		var hiEl = $('<p>').text('High: ' + hi + ' ' + String.fromCharCode(176) + 'F');
+
+		$('#weather').append(tempEl, feelsLikeEl, statusEl, descripEl, windSpeedEl, lowEl, hiEl);
+
+		// var lat = response.coord.lat;
+		// var long = response.coord.lon;
 		// uvIndex(lat, long);
 
 		// $('#temp').text(temp + ' ' + String.fromCharCode(176) + 'F');
@@ -137,6 +155,8 @@ placesAutocomplete.on('change', (e) => {
 			? inputObject.latlng.lng.toFixed(4)
 			: '%2B' + inputObject.latlng.lng.toFixed(4);
 	var location = inputObject.latlng.lat.toFixed(4) + lng;
+
+	getCurrentWeather(cityName);
 
 	// creating the query URL for the ajax request
 	var queryURL =
