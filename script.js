@@ -5,6 +5,31 @@ var placesAutocomplete = places({
 	container: document.querySelector('#address-input')
 });
 
+function getCurrentTime(timezone) {
+	if (!timezone) {
+		return 'Not Available';
+	}
+	// settings
+	var settings = {
+		async: true,
+		crossDomain: true,
+		url: 'https://wft-geo-db.p.rapidapi.com/v1/locale/timezones/' + timezone + '/time',
+		method: 'GET',
+		headers: {
+			'x-rapidapi-host': 'wft-geo-db.p.rapidapi.com',
+			'x-rapidapi-key': '8671db22c0mshaa910c9a37cdeb0p1568fejsn57c4371fdcb4'
+		}
+	};
+
+	return $.ajax(settings).then(function(response) {
+		// console.log(response, response.data);
+		console.log(response.data);
+		var currentTime = response.data.substring(0, 5);
+
+		return currentTime;
+	});
+}
+
 // Geo DB city details api request
 function getCityDetails(cityID) {
 	console.log('getCityDetails');
@@ -22,31 +47,6 @@ function getCityDetails(cityID) {
 			'x-rapidapi-key': '8671db22c0mshaa910c9a37cdeb0p1568fejsn57c4371fdcb4'
 		}
 	};
-
-	function getCurrentTime(timezone) {
-		if (!timezone) {
-			return 'Not Available';
-		}
-		// settings
-		var settings = {
-			async: true,
-			crossDomain: true,
-			url: 'https://wft-geo-db.p.rapidapi.com/v1/locale/timezones/' + timezone + '/time',
-			method: 'GET',
-			headers: {
-				'x-rapidapi-host': 'wft-geo-db.p.rapidapi.com',
-				'x-rapidapi-key': '8671db22c0mshaa910c9a37cdeb0p1568fejsn57c4371fdcb4'
-			}
-		};
-
-		return $.ajax(settings).then(function(response) {
-			// console.log(response, response.data);
-			console.log(response.data);
-			var currentTime = response.data.substring(0, 5);
-
-			return currentTime;
-		});
-	}
 
 	// calling city details api request
 	$.ajax(settings).then(function(response) {
@@ -102,6 +102,7 @@ placesAutocomplete.on('change', (e) => {
 	$('.intro-card').hide();
 
 	// grabbing city name and country code from the input, and latitude and longitude
+	// formatting the long and lat to how the api wants to recieve it
 	var cityName = inputObject.name;
 	var countryCode = inputObject.countryCode;
 	var lng =
@@ -109,11 +110,6 @@ placesAutocomplete.on('change', (e) => {
 			? inputObject.latlng.lng.toFixed(4)
 			: '%2B' + inputObject.latlng.lng.toFixed(4);
 	var location = inputObject.latlng.lat.toFixed(4) + lng;
-	console.log(location);
-
-	// console.log(typeof location, location);
-
-	// console.log(cityName, countryCode);
 
 	// creating the query URL for the ajax request
 	var queryURL =
@@ -124,8 +120,6 @@ placesAutocomplete.on('change', (e) => {
 		'&location=' +
 		location +
 		'&radius=10';
-
-	// console.log(queryURL);
 
 	// creating settings object for the ajax call, including the url above
 	var settings = {
