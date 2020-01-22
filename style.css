@@ -3,7 +3,6 @@ body {
     min-height: 100vh;
     flex-direction: column;
     background-image: url(./images/carousel\ image\ 4.jpg);
-    background-repeat: no-repeat;
     background-size: 100vw;
   }
 
