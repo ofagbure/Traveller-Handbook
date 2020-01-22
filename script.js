@@ -179,14 +179,6 @@ function getCurrentWeather(cityName) {
 		var hiEl = $('<p>').text('High: ' + hi + ' ' + String.fromCharCode(176) + 'F');
 
 		$('#weather').append(tempEl, feelsLikeEl, statusEl, descripEl, windSpeedEl, lowEl, hiEl);
-
-		// var lat = response.coord.lat;
-		// var long = response.coord.lon;
-		// uvIndex(lat, long);
-
-		// $('#temp').text(temp + ' ' + String.fromCharCode(176) + 'F');
-		// $('#humidity').text(humidity + '%');
-		// $('#wind-speed').text(windSpeed + ' mph');
 	});
 }
 
