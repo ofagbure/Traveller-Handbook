@@ -2,7 +2,8 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-image: url(./images/carousel\ image\ 4.jpg);
+    background-image: url(./images/pexels-photo-2147486.jpeg);
+    background-repeat: no-repeat;
     background-size: 100vw;
   }
 
@@ -30,3 +31,11 @@ opacity: 0.8;
 #forecast-cards {
   margin-left: 80px;
 }
+
+@media only screen and (max-width: 620px){
+nav .brand-logo {
+  font-size: 22px;
+    /* left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%); */
+}}
