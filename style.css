@@ -24,6 +24,7 @@ body {
 
 .results-card{
 display: none;
+opacity: 0.8;
 }
 
 #forecast-cards {
