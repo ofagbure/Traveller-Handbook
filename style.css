@@ -25,3 +25,7 @@ body {
 .results-card{
 display: none;
 }
+
+#forecast-cards {
+  margin-left: 80px;
+}
