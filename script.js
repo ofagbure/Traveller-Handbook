@@ -70,6 +70,10 @@ function getCurrencyDetails(countryID) {
 		$.ajax(settings).done(function(response) {
 			// string value of the currency with a ton of decimal places
 			console.log(typeof response);
+
+			var ptag = $('<p>').text('1 USD is equal to ' + response + ' ' + currencyCode);
+
+			$('#Currency').append(ptag);
 		});
 	});
 }
@@ -174,13 +178,13 @@ function getCurrentWeather(cityName) {
 
 		// $('#weather').empty();
 
-		var tempEl = $('<p>').text('Temperature: ' + temp + ' ' + String.fromCharCode(176) + 'F');
-		var feelsLikeEl = $('<p>').text('Feels like: ' + feelsLike + ' ' + String.fromCharCode(176) + 'F');
-		var statusEl = $('<p>').text('Status: ' + status);
-		var descripEl = $('<p>').text('Description: ' + description);
-		var windSpeedEl = $('<p>').text('Wind speed: ' + windSpeed + ' mph');
-		var lowEl = $('<p>').text('Low: ' + low + ' ' + String.fromCharCode(176) + 'F');
-		var hiEl = $('<p>').text('High: ' + hi + ' ' + String.fromCharCode(176) + 'F');
+		$('#temp').text(temp + ' ' + String.fromCharCode(176) + 'F');
+		$('#feels').text(feelsLike + ' ' + String.fromCharCode(176) + 'F');
+		// $('').text('Status: ' + status);
+		$('#description').text(description);
+		$('#wind').text(windSpeed + ' mph');
+		$('#low').text('Low: ' + low + ' ' + String.fromCharCode(176) + 'F');
+		$('#high').text('High: ' + hi + ' ' + String.fromCharCode(176) + 'F');
 
 		// $('#weather').append(tempEl, feelsLikeEl, statusEl, descripEl, windSpeedEl, lowEl, hiEl);
 	});
@@ -240,7 +244,7 @@ placesAutocomplete.on('change', (e) => {
 	var location = inputObject.latlng.lat.toFixed(4) + lng;
 
 	getCurrentWeather(cityName);
-	getCityInfo(cityName);
+	// getCityInfo(cityName);
 
 	// creating the query URL for the ajax request
 	var queryURL =
