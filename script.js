@@ -51,21 +51,25 @@ function getCurrencyDetails(countryID) {
 
 		var currencyCode = response.data[0].code;
 
-		var url = 'https://currency13.p.rapidapi.com/convert/100/USD/' + currencyCode;
+		var to = currencyCode;
+		var from = 'USD';
+
+		var callURL = 'https://currency-exchange.p.rapidapi.com/exchange?q=1.0&from=' + from + '&to=' + to;
 
 		var settings = {
 			async: true,
 			crossDomain: true,
-			url: url,
+			url: callURL,
 			method: 'GET',
 			headers: {
-				'x-rapidapi-host': 'currency13.p.rapidapi.com',
+				'x-rapidapi-host': 'currency-exchange.p.rapidapi.com',
 				'x-rapidapi-key': '8671db22c0mshaa910c9a37cdeb0p1568fejsn57c4371fdcb4'
 			}
 		};
 
-		$.ajax(settings).then(function(response) {
-			console.log(response);
+		$.ajax(settings).done(function(response) {
+			// string value of the currency with a ton of decimal places
+			console.log(typeof response);
 		});
 	});
 }
@@ -168,7 +172,7 @@ function getCurrentWeather(cityName) {
 
 		var windSpeed = response.wind.speed;
 
-		$('#weather').empty();
+		// $('#weather').empty();
 
 		var tempEl = $('<p>').text('Temperature: ' + temp + ' ' + String.fromCharCode(176) + 'F');
 		var feelsLikeEl = $('<p>').text('Feels like: ' + feelsLike + ' ' + String.fromCharCode(176) + 'F');
@@ -178,15 +182,7 @@ function getCurrentWeather(cityName) {
 		var lowEl = $('<p>').text('Low: ' + low + ' ' + String.fromCharCode(176) + 'F');
 		var hiEl = $('<p>').text('High: ' + hi + ' ' + String.fromCharCode(176) + 'F');
 
-		$('#weather').append(tempEl, feelsLikeEl, statusEl, descripEl, windSpeedEl, lowEl, hiEl);
-
-		// var lat = response.coord.lat;
-		// var long = response.coord.lon;
-		// uvIndex(lat, long);
-
-		// $('#temp').text(temp + ' ' + String.fromCharCode(176) + 'F');
-		// $('#humidity').text(humidity + '%');
-		// $('#wind-speed').text(windSpeed + ' mph');
+		// $('#weather').append(tempEl, feelsLikeEl, statusEl, descripEl, windSpeedEl, lowEl, hiEl);
 	});
 }
 
