@@ -70,6 +70,10 @@ function getCurrencyDetails(countryID) {
 		$.ajax(settings).done(function(response) {
 			// string value of the currency with a ton of decimal places
 			console.log(typeof response);
+
+			var ptag = $('<p>').text('1 USD is equal to ' + response + ' ' + currencyCode);
+
+			$('#Currency').append(ptag);
 		});
 	});
 }
@@ -240,7 +244,7 @@ placesAutocomplete.on('change', (e) => {
 	var location = inputObject.latlng.lat.toFixed(4) + lng;
 
 	getCurrentWeather(cityName);
-	getCityInfo(cityName);
+	// getCityInfo(cityName);
 
 	// creating the query URL for the ajax request
 	var queryURL =
