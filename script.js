@@ -124,10 +124,25 @@ function getCityDetails(cityID) {
 		// Wait 1.5 seconds because our API takes one call per second max for free plan
 		setTimeout(function() {
 			getCurrentTime(timezone).then(function(currentTime) {
+				var hour = currentTime.substring(0,2);
+				console.log(hour);
+				var rest = currentTime.substring(2);
+				if (parseInt(hour) > 12) {
+					hour = hour - 12;
+					currentTime = hour + rest + " PM";
+
+				}
+				else if(hour === 12) {
+					currentTime = hour + rest + " PM";
+				}
+				else {
+					currentTime = hour + rest + " AM";
+				}
 				console.log(currentTime);
 
 				var timeEl = $('<p>').text('Current Time: ' + currentTime);
 				$('#moreInfo').append(popEl, elevationEl, timeEl);
+
 
 				setTimeout(function() {
 					getCurrencyDetails(countryID);
