@@ -71,9 +71,16 @@ function getCurrencyDetails(countryID) {
 			// string value of the currency with a ton of decimal places
 			console.log(typeof response);
 
+			var exchangeRate = parseFloat(response);
+
 			var ptag = $('<p>').text('1 USD is equal to ' + response + ' ' + currencyCode);
 
-			$('#Currency').append(ptag);
+			$('#Currency').prepend(ptag);
+
+			$('#from').text(from);
+			$('#from-amt').text('1');
+			$('#to').text(to);
+			$('#to-amt').text(exchangeRate.toFixed(2));
 		});
 	});
 }
