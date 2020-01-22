@@ -106,6 +106,13 @@ function getCityDetails(cityID) {
 		// in meters
 		var elevation = response.data.elevationMeters || 'Not Available';
 
+		if (elevation !== 'Not Available') {
+			var numElevation = parseInt(elevation);
+			// converting meters to feet
+			numElevation = numElevation * 3.281;
+			elevation = numElevation.toString();
+		}
+
 		// timezone code for another api call
 		var timezone = response.data.timezone;
 
@@ -119,7 +126,7 @@ function getCityDetails(cityID) {
 		$('#moreInfo').empty();
 
 		var popEl = $('<p>').text('Population: ' + population);
-		var elevationEl = $('<p>').text('Elevation (m): ' + elevation);
+		var elevationEl = $('<p>').text('Elevation: ' + elevation + ' ft');
 
 		// Wait 1.5 seconds because our API takes one call per second max for free plan
 		setTimeout(function() {
