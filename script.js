@@ -194,8 +194,6 @@ function getCurrentWeather(cityName) {
 
 		var windSpeed = response.wind.speed;
 
-		// $('#weather').empty();
-
 		$('#temp').text(temp + ' ' + String.fromCharCode(176) + 'F');
 		$('#feels').text(feelsLike + ' ' + String.fromCharCode(176) + 'F');
 		// $('').text('Status: ' + status);
@@ -203,8 +201,6 @@ function getCurrentWeather(cityName) {
 		$('#wind').text(windSpeed + ' mph');
 		$('#low').text(low + ' ' + String.fromCharCode(176) + 'F');
 		$('#high').text(hi + ' ' + String.fromCharCode(176) + 'F');
-
-		// $('#weather').append(tempEl, feelsLikeEl, statusEl, descripEl, windSpeedEl, lowEl, hiEl);
 	});
 }
 
