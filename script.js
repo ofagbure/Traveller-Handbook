@@ -248,8 +248,7 @@ placesAutocomplete.on('change', (e) => {
 	var inputObject = e.suggestion;
 	console.log(inputObject);
 
-	$('.results-card').show();
-	$('.intro-card').hide();
+	$('.results-card').fadeIn(1500);
 
 	// grabbing city name and country code from the input, and latitude and longitude
 	// formatting the long and lat to how the api wants to recieve it
