@@ -33,6 +33,7 @@ The app utilizes the below APIs;
 - Open Weather 
 - Currency Exchange
 - Trip Advisor
+- Algolia
 
 ## License
 
