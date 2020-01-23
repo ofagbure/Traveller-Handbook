@@ -267,6 +267,7 @@ placesAutocomplete.on('change', (e) => {
 	console.log(inputObject);
 
 	$('.results-card').fadeIn(1500);
+	$('#currencySummary').empty();
 
 	// grabbing city name and country code from the input, and latitude and longitude
 	// formatting the long and lat to how the api wants to recieve it
@@ -279,7 +280,7 @@ placesAutocomplete.on('change', (e) => {
 	var location = inputObject.latlng.lat.toFixed(4) + lng;
 
 	getCurrentWeather(cityName);
-	// getCityInfo(cityName);
+	getCityInfo(cityName);
 
 	// creating the query URL for the ajax request
 	var queryURL =
