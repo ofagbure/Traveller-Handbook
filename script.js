@@ -79,8 +79,8 @@ function getCurrencyDetails(countryID) {
 
 			$('#from').text(from);
 			$('#from-amt').text('1');
-			$('#to').text(to);
-			$('#to-amt').text(exchangeRate.toFixed(2));
+			// $('#to').text(to);
+			// $('#to-amt').text(exchangeRate.toFixed(2));
 		});
 	});
 }

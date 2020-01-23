@@ -36,6 +36,10 @@ main {
 	padding-top: 0px;
 }
 
+input {
+	color: white;
+}
+
 @media only screen and (max-width: 620px) {
 	nav .brand-logo {
 		font-size: 22px;
