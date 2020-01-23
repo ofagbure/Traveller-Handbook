@@ -1,12 +1,4 @@
 body {
-<<<<<<< HEAD
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    background-image: url(./images/pexels-photo-2147486.jpeg);
-    background-size: 100vw;
-  }
-=======
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
@@ -14,7 +6,6 @@ body {
 	background-repeat: no-repeat;
 	background-size: 100vw;
 }
->>>>>>> 662cfe7b1a55d638f2183969e5e8b83e7a87d46c
 
 main {
 	flex: 1 0 auto;
