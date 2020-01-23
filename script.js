@@ -30,6 +30,22 @@ function getCurrentTime(timezone) {
 	});
 }
 
+function converCurrency(exchangeRate, currencyCode) {
+	var inputVal = $('#from-amt').val();
+
+	console.log(typeof inputVal, inputVal);
+	if (inputVal !== '') {
+		var inputNum = parseInt(inputVal);
+		console.log(typeof inputNum, inputNum);
+		var newValue = (inputNum * exchangeRate).toFixed(2);
+		console.log(typeof newValue, newValue);
+
+		$('#currencySummary').empty();
+
+		$('#currencySummary').text(inputVal + ' USD is equal to ' + newValue + ' ' + currencyCode);
+	}
+}
+
 function getCurrencyDetails(countryID) {
 	console.log('currency call');
 
@@ -73,14 +89,13 @@ function getCurrencyDetails(countryID) {
 
 			var exchangeRate = parseFloat(response);
 
-			var ptag = $('<p>').text('1 USD is equal to ' + response + ' ' + currencyCode);
+			var ptag = $('<p id= currencySummary>').text('1 USD is equal to ' + response + ' ' + currencyCode);
 
 			$('#Currency').prepend(ptag);
 
-			$('#from').text(from);
-			$('#from-amt').text('1');
-			// $('#to').text(to);
-			// $('#to-amt').text(exchangeRate.toFixed(2));
+			$('.btn').on('click', function() {
+				converCurrency(exchangeRate, currencyCode);
+			});
 		});
 	});
 }
