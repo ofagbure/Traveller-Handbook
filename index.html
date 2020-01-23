@@ -45,6 +45,7 @@
                     </div>
                 </li>
             </ul>
+
             <!-- Results card that will be hidden at the beginning of the page -->
             <div class="col s12 results-card">
                 <div class="card-panel">
@@ -86,7 +87,7 @@
                                         </div>
                                     </div>
                                     <!-- 5 day forecast subcards -->
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="col s12 forecast-cards">
                                             <div class="col s2">
                                                 <div class="card horizontal light-blue darken-1">
@@ -225,7 +226,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -244,7 +245,20 @@
                             <div class="card-panel teal">
                                 <div class="card-content white-text">
                                     <h4 class="card-title">Currency Details</h4>
-                                    <div id="Currency"></div>
+                                    <div id="Currency">
+                                        <div class = "row">
+                                            <div class="col s6 frominput">
+                                                <input name="amount" id="from-amt" type="number">
+                                                <label for="amount">New amount</label>
+                                                
+                                            </div>
+
+                                            <div class="col s6 fromusd">
+                                                <a class="waves-effect waves-light btn">convert</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

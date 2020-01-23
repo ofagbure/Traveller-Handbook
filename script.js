@@ -30,6 +30,22 @@ function getCurrentTime(timezone) {
 	});
 }
 
+function converCurrency(exchangeRate, currencyCode) {
+	var inputVal = $('#from-amt').val();
+
+	console.log(typeof inputVal, inputVal);
+	if (inputVal !== '') {
+		var inputNum = parseInt(inputVal);
+		console.log(typeof inputNum, inputNum);
+		var newValue = (inputNum * exchangeRate).toFixed(2);
+		console.log(typeof newValue, newValue);
+
+		$('#currencySummary').empty();
+
+		$('#currencySummary').text(inputVal + ' USD is equal to ' + newValue + ' ' + currencyCode);
+	}
+}
+
 function getCurrencyDetails(countryID) {
 	console.log('currency call');
 
@@ -71,9 +87,15 @@ function getCurrencyDetails(countryID) {
 			// string value of the currency with a ton of decimal places
 			console.log(typeof response);
 
-			var ptag = $('<p>').text('1 USD is equal to ' + response + ' ' + currencyCode);
+			var exchangeRate = parseFloat(response);
 
-			$('#Currency').append(ptag);
+			var ptag = $('<p id= currencySummary>').text('1 USD is equal to ' + response + ' ' + currencyCode);
+
+			$('#Currency').prepend(ptag);
+
+			$('.btn').on('click', function() {
+				converCurrency(exchangeRate, currencyCode);
+			});
 		});
 	});
 }
@@ -110,7 +132,7 @@ function getCityDetails(cityID) {
 			var numElevation = parseInt(elevation);
 			// converting meters to feet
 			numElevation = numElevation * 3.281;
-			elevation = numElevation.toString();
+			elevation = numElevation.toString() + ' ft';
 		}
 
 		// timezone code for another api call
@@ -126,7 +148,7 @@ function getCityDetails(cityID) {
 		$('#moreInfo').empty();
 
 		var popEl = $('<p>').text('Population: ' + population);
-		var elevationEl = $('<p>').text('Elevation: ' + elevation + ' ft');
+		var elevationEl = $('<p>').text('Elevation: ' + elevation);
 
 		// Wait 1.5 seconds because our API takes one call per second max for free plan
 		setTimeout(function() {
@@ -194,8 +216,6 @@ function getCurrentWeather(cityName) {
 
 		var windSpeed = response.wind.speed;
 
-		// $('#weather').empty();
-
 		$('#temp').text(temp + ' ' + String.fromCharCode(176) + 'F');
 		$('#feels').text(feelsLike + ' ' + String.fromCharCode(176) + 'F');
 		// $('').text('Status: ' + status);
@@ -203,8 +223,6 @@ function getCurrentWeather(cityName) {
 		$('#wind').text(windSpeed + ' mph');
 		$('#low').text(low + ' ' + String.fromCharCode(176) + 'F');
 		$('#high').text(hi + ' ' + String.fromCharCode(176) + 'F');
-
-		// $('#weather').append(tempEl, feelsLikeEl, statusEl, descripEl, windSpeedEl, lowEl, hiEl);
 	});
 }
 
@@ -248,8 +266,8 @@ placesAutocomplete.on('change', (e) => {
 	var inputObject = e.suggestion;
 	console.log(inputObject);
 
-	$('.results-card').show();
-	$('.intro-card').hide();
+	$('.results-card').fadeIn(1500);
+	$('#currencySummary').empty();
 
 	// grabbing city name and country code from the input, and latitude and longitude
 	// formatting the long and lat to how the api wants to recieve it
@@ -262,7 +280,7 @@ placesAutocomplete.on('change', (e) => {
 	var location = inputObject.latlng.lat.toFixed(4) + lng;
 
 	getCurrentWeather(cityName);
-	// getCityInfo(cityName);
+	getCityInfo(cityName);
 
 	// creating the query URL for the ajax request
 	var queryURL =
