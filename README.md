@@ -4,9 +4,9 @@ An app that provides basic information on a given city.
 ## Table of Contents 
 * [Description](#Description)
 * [Screenshots/Demo](#Screenshots/Demo)
-* [BuiltWith](#BuiltWith)
-* [APIsUsed](#APIs Used)
-* [License](#license)
+* [Built With](#BuiltWith)
+* [APIs Used](#APIsUsed)
+* [License](#License)
 * [Badges](#Badges)
 
 ## Description 
