@@ -3,7 +3,6 @@ body {
 	min-height: 100vh;
 	flex-direction: column;
 	background-image: url(./images/pexels-photo-2147486.jpeg);
-	background-repeat: no-repeat;
 	background-size: 100vw;
 }
 
