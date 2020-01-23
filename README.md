@@ -3,8 +3,8 @@ An app that provides basic information on a given city.
 
 ## Table of Contents 
 * [Description](#Description)
-* [Screenshots / Demo](#Screenshots / Demo)
-* [BuiltWith](#Buil tWith)
+* [Screenshots/Demo](#Screenshots/Demo)
+* [BuiltWith](#BuiltWith)
 * [APIsUsed](#APIs Used)
 * [License](#license)
 * [Badges](#Badges)
