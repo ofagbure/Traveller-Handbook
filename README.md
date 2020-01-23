@@ -3,13 +3,24 @@ An app that provides basic information on a given city.
 
 ## Table of Contents 
 * [Description](#Description)
-* [Built With](#BuiltWith)
-* [APIs Used](#APIsUsed)
+* [Screenshots / Demo](#Screenshots / Demo)
+* [BuiltWith](#Buil tWith)
+* [APIsUsed](#APIs Used)
 * [License](#license)
 * [Badges](#Badges)
 
 ## Description 
 This is a web app that provides information on any given city to travellers. The app takes in the user's input on a given location and provides a brief description of the city, a picture of a location in the city, the current weather, relevant information (population, elevation, current time), as well as the exchange rate for that city's currency relative to USD. 
+
+## Screenshots / Demo
+The app opens to the landing page;
+
+![landingpage](./images/LandingPage.png)
+
+
+Upon Entering the name of the city you want to visit, the page adds the below information;
+
+![MoreInfo](./images/MoreInfo.png)
 
 ## Built With...
 The app was built by using the below frameworks;
