@@ -24,15 +24,15 @@ Upon Entering the name of the city you want to visit, the page adds the below in
 
 ## Built With...
 The app was built by using the below frameworks;
-Materialize - CSS Framework
-Jquery - JS Library
+- Materialize - CSS Framework
+- Jquery - JS Library
 
 ## APIs Used...
 The app utilizes the below APIs;
--Geo BD
--Open Weather API
--Currency API
--Trip Advisor API
+- Geo BD
+- Open Weather 
+- Currency Exchange
+- Trip Advisor
 
 ## License
 
