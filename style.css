@@ -6,11 +6,17 @@ body {
 	background-size: 100vw;
 }
 
+.brand-logo {
+	width: 100%;
+}
+
 main {
 	flex: 1 0 auto;
 }
 .collection-header {
 	opacity: 0.8;
+	overflow: scroll;
+	height: auto;
 }
 .card1 {
 	border: 0px;
@@ -43,9 +49,12 @@ input {
 	z-index: 1;
 }
 
-.algolia-places {
-	z-index: 100;
-}
+/* .algolia-places { */
+/* z-index: 100; */
+/* overflow: hidden; */
+/* display: block; */
+/* height: 50%; */
+/* } */
 
 @media only screen and (max-width: 620px) {
 	nav .brand-logo {
@@ -56,3 +65,20 @@ input {
 	}
 }
 
+img {
+	position: relative;
+	width: 100%;
+}
+
+/* #address-input {
+	display: block;
+	z-index: -1; */
+/* overflow: overlay; */
+/* } */
+
+/* .ap-dropdown-menu { */
+/* display: block; */
+/* z-index: 1; */
+/* overflow: scroll; */
+/* margin-bottom: 40px; */
+/* } */
