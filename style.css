@@ -21,9 +21,12 @@ main {
 .card1 {
 	border: 0px;
 }
-.collection.with-header .collection-header {
+.collection.with-header,
+.collection-header {
 	border-bottom: 0px;
+	overflow: visible;
 }
+
 .card .card-content {
 	border: 0px;
 }
