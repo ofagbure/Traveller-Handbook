@@ -1,5 +1,5 @@
 # The Traveller's Handbook
-An app that provides basic information on a given city.
+An app that provides basic information on a given city. Click [here](https://ofagbure.github.io/Traveller-Handbook/) to see the deployed site!
 
 ## Table of Contents 
 * [Description](#Description)
